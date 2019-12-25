@@ -31,10 +31,24 @@ Simply download and unzip the folder - then run the x_ops program, enter the fil
 * Sandwich a phrase as the bun outside another phrase
   * `sandwich bacon` yields words like BACKGAMMON
   
+### Utility functions
+* Plus - add a word to the list
+  * `plus livinmybestlife` adds LIVINMYBESTLIFE to the list
+* Minus - delete a word from the list
+  * `minus fetch` removes FETCH from the list; seriously stop trying to make fetch happen
+* Write - write the entire wordlist in memory to a new file
+  * `write my_new_list` writes the your list to the file my_new_list.txt
+  
 ### Notes
 * You can limit the range of results - just type in a number or range of numbers separated by a dash to restrict the output: `5-16`
 * Type 'help' to get a list of keywords and a short description
+* Use `.` as for a wildcard "any letter"
+* Regex expressions work on the endpoints.  So you could do something like `b [A,U][A,G]` for words that begin with the combinations of A or U as the first letter and A or G as the second letter.
+
+### Disclaimers
+* This module is not intended for entries with spaces.  You can do some stuff like `regex $STAR W.*` to get STAR WARS on such a list, but all functionality is not guaranteed
 * This release is not optimized by, nor does it support, word scores
+* Decoding is basic utf8, so nonstandard A-Z characters are **IGNORED**.  ÉCHAMELACULPA will render as only CHAMELACULPA in the list
 
 <sup>1</sup>Possible anagrams increase exponentially, with 6 possibilities for a 3-letter word and 720 possibilities for a 6-letter word.  This particular release does not have an optimization module for re-searching a giant wordlist that many times, so a random subset is taken.
 
