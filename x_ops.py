@@ -1,6 +1,5 @@
 import re
 
-
 class Crosstalk:
     def __init__(self, file_location):
         with open(file_location, "r", encoding="utf8", errors='ignore') as f:
@@ -13,10 +12,12 @@ class Crosstalk:
             "b": self.beginning,
             "c": self.contains,
             "e": self.ending,
+            "middle": self.middle,
             "near": self.near,
             "oneoff": self.oneoff,
             "regex": self.regex,
             "sandwich": self.sandwich,
+            "spread": self.spread,
             "plus": self.plus,
             "minus": self.minus,
             "write": self.write,
@@ -69,13 +70,15 @@ class Crosstalk:
         return list(result)
 
     def anagram(self, word):
-        """words with ten random permutations of the input phrase."""
-        from itertools import permutations
-        from random import sample
-        anagrams = ["".join(perm) for perm in permutations(word)]
-        random_sample = sample(anagrams, min(len(anagrams), 10))
-        print("Searching for the anagrams: ",random_sample)
-        return list(set(self.flatten([self.contains(wd) for wd in random_sample])))
+        """words with anagrams of the input phrase."""
+        result = []
+        word_len = len(word)
+        for list_word in self.ls:
+            for i in range(self.dict[list_word] - word_len + 1):
+                if self.is_anagram(list_word[i:i+word_len], word) and not re.search(f".*{word}.*", list_word):
+                    result.append(list_word)
+                    break
+        return result
 
     def backwards(self, word):
         """words that have the input phrase in reverse order"""
@@ -87,9 +90,7 @@ class Crosstalk:
 
     def contains(self, word):
         """words that contain the input phrase."""
-        return [
-            list_word for list_word in self.ls if re.search(f".*{word}.*", list_word)
-        ]
+        return [list_word for list_word in self.ls if re.search(f".*{word}.*", list_word)]
 
     def ending(self, word):
         """words that end with the input phrase."""
@@ -100,6 +101,17 @@ class Crosstalk:
         for key in self.supported_keywords:
             print(f"Use keyword '{key}' for {self.supported_keywords[key].__doc__}")
         print("Or...type 'q' to quit")
+
+    def middle(self, word):
+        """words that have the input in the exact center."""
+        l = len(word)
+        result = []
+        for list_word in self.ls:
+            if (self.dict[list_word] - l) % 2 == 0:
+                idx = ((self.dict[list_word] - l) // 2)
+                if list_word[idx:idx+l] == word:
+                    result.append(list_word)
+        return result
 
     def near(self, word):
         """words that are one letter off another word."""
@@ -143,6 +155,24 @@ class Crosstalk:
                 ]
             )
         return list(result)
+
+    def spread(self, word):
+        """words that have the input word's letters spaced out within it."""
+        result = []
+        for list_word in self.ls:
+            pointer = len(word) - 1
+            skip = False
+            for i in range(self.dict[list_word]-1, -1, -1):
+                if not skip:
+                    if word[pointer] == list_word[i]:
+                        pointer = pointer - 1
+                        skip = True
+                    if pointer < 0:
+                        result.append(list_word)
+                        break
+                else:
+                    skip = False
+        return result
 
     #####
     ## Utilty functions
@@ -225,6 +255,10 @@ class Crosstalk:
             if self.dict[word] == counter:
                 print(word)
         return True
+
+    def is_anagram(self, word1, word2):
+        from collections import Counter
+        return Counter(word1) == Counter(word2)
 
     def flatten(self, l):
         """Flatten a list of lists"""
