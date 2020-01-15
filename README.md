@@ -8,7 +8,8 @@ Simply download and unzip the folder - then run the x_ops program, enter the fil
 1. Get the wordlist:
     * -(E.g. in crossword compiler, go to Words->Word List Manager->Convert->List to Plain Text File .. do not include word scores.)
 1.  Double-click to run the x_ops.exe file from the folder you unzipped
-1.  In the window that pops up, type in the file location of your list, e.g.:  C:\Downloads\mylist.txt    (for MAC, you can right click and hold the option key - then choose "Copy <yourfile> as Pathname")
+1.  In the window that pops up, type in the file location of your list, e.g.:  C:\Downloads\mylist.txt
+   * -(for MAC, to get the file path, right click on your txt file in Finder and hold the option key - then "Copy <yourfile> as Pathname")
 1.  Use the functions to mine your list.  It's that easy!
 
 ### Crossword Archetypes Currently Supported
