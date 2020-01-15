@@ -8,20 +8,22 @@ Simply download and unzip the folder - then run the x_ops program, enter the fil
 1. Get the wordlist:
     * -(E.g. in crossword compiler, go to Words->Word List Manager->Convert->List to Plain Text File .. do not include word scores.)
 1.  Double-click to run the x_ops.exe file from the folder you unzipped
-1.  In the window that pops up, type in the file location of your list, e.g.:  C:\Downloads\mylist.txt
+1.  In the window that pops up, type in the file location of your list, e.g.:  C:\Downloads\mylist.txt  (for MAC, you can right click and hold the option key - then choose "Copy <yourfile> as Pathname)
 1.  Use the functions to mine your list.  It's that easy!
 
 ### Crossword Archetypes Currently Supported
 * Add a phrase to make another valid phrase
   * `add mit` yields words like COMMITMENT (comment+mit)
-* Anagrams - 10 randomly selected anagrams are tested<sup>1</sup>
-  * `anagram mouse` yields words like EXCUSEMOI on one try, BECOMEUSELESS on another, or nothing on another
+* Anagrams contained within
+  * `anagram mouse` yields words like EXCUSEMOI or BECOMEUSELESS
 * Backwards entries
   * `backwards party` yields words like VENUSFLYTRAP
 * Beginning of a phrase
   * `b qa` yields words like QATAR
 * Ending a phrase
   * `e zz` yields words like HOTFUZZ
+* Middle of a phrase
+  * `middle child` yields words like SWEETCHILDOMINE
 * Near-same words
   * `near mouse` yields words like MOOSE
 * One-off, with a specific letter (This is a sample specialty search, where you need the missing letters to spell something in particular)
@@ -30,6 +32,8 @@ Simply download and unzip the folder - then run the x_ops program, enter the fil
   * `regex ^bea.*dy$` yields words like BEARDEDLADY
 * Sandwich a phrase as the bun outside another phrase
   * `sandwich bacon` yields words like BACKGAMMON
+* Spread a word out such that the letters can be marked as non-adjacent
+  * `spread butter` yields words like BELLYUPTOTHEBAR
   
 ### Utility functions
 * Plus - add a word to the list
@@ -50,7 +54,5 @@ Simply download and unzip the folder - then run the x_ops program, enter the fil
 * This release is not optimized by, nor does it support, word scores
 * Decoding is basic utf8, so nonstandard A-Z characters are **IGNORED**.  ÉCHAMELACULPA will render as only CHAMELACULPA in the list
 
-<sup>1</sup>Possible anagrams increase exponentially, with 6 possibilities for a 3-letter word and 720 possibilities for a 6-letter word.  This particular release does not have an optimization module for re-searching a giant wordlist that many times, so a random subset is taken.
-
-x_ops "Crosstalk" release v1.0
+x_ops "Crosstalk" release v2.0
 All rights reserved
