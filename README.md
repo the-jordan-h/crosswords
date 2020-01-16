@@ -21,6 +21,8 @@ Simply download and unzip the folder - then run the x_ops program, enter the fil
   * `backwards party` yields words like VENUSFLYTRAP
 * Beginning of a phrase
   * `b qa` yields words like QATAR
+* Contained within a phrase
+  * `c train` yields words like UNRESTRAINED
 * Ending a phrase
   * `e zz` yields words like HOTFUZZ
 * Middle of a phrase
